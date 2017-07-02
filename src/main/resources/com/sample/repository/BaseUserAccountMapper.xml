@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.repository.BaseUserAccountMapper">
+
+<select id="findById" parameterType="String"
+        resultType="com.sample.dto.BaseUserAccountDto" flushCache="true">
+        SELECT
+        id,password
+        FROM BASE_USER_ACCOUNT
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultSetType="SCROLL_SENSITIVE"
+        resultType="com.sample.dto.BaseUserAccountDto" flushCache="true">
+        SELECT
+        id,password
+        FROM BASE_USER_ACCOUNT
+    </select>
+
+  <insert id="insert" parameterType="com.sample.dto.BaseUserAccountDto">
+    INSERT INTO BASE_USER_ACCOUNT (id,password)
+    VALUES (#{id},#{password})
+  </insert>
+
+  <insert id="update" parameterType="com.sample.dto.BaseUserAccountDto">
+    UPDATE BASE_USER_ACCOUNT SET id=#{id},password=#{password}
+    WHERE id=#{id}
+  </insert>
+
+  <insert id="delete" parameterType="com.sample.dto.BaseUserAccountDto">
+    DELETE FROM BASE_USER_ACCOUNT
+    WHERE id=#{id}
+  </insert>
+
+</mapper>

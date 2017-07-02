@@ -1,8 +1,8 @@
 package com.sample.dto.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class BaseUser {
 
     @Id
-    @GeneratedValue
-    private int id;
+    private String id;
+    @Size(max=30)
     private String firstName;
+    @Size(max=30)
     private String lastName;
 }

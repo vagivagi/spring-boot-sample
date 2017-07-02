@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.repository.BaseUserMapper">
+
+<select id="findById" parameterType="String"
+        resultType="com.sample.dto.BaseUserDto" flushCache="true">
+        SELECT
+        id,first_name,last_name
+        FROM BASE_USER
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultSetType="SCROLL_SENSITIVE"
+        resultType="com.sample.dto.BaseUserDto" flushCache="true">
+        SELECT
+        id,first_name,last_name
+    </select>
+
+  <insert id="insert" parameterType="com.sample.dto.BaseUserDto">
+    INSERT INTO BASE_USER (id,first_name,last_name)
+    VALUES (#{id},#{firstName},#{lastName})
+  </insert>
+
+  <insert id="update" parameterType="com.sample.dto.BaseUserDto">
+    UPDATE BASE_USER SET id=#{id},first_name=#{first_name},last_name=#{last_name}
+    WHERE id=#{id}
+  </insert>
+
+  <insert id="delete" parameterType="com.sample.dto.BaseUserDto">
+    DELETE FROM BASE_USER
+    WHERE id=#{id}
+  </insert>
+
+</mapper>
