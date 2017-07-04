@@ -18,12 +18,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.securityContext().disable();
         http.authorizeRequests().antMatchers("/loginForm").permitAll().anyRequest().authenticated().and().formLogin()
-                .loginProcessingUrl("/login").loginPage("/loginForm").failureUrl("/loginForm?error").defaultSuccessUrl("/", true)
+                .loginProcessingUrl("/login").loginPage("/loginForm").failureUrl("/loginForm?error").defaultSuccessUrl("/baseUser/", true)
                 .usernameParameter("id").passwordParameter("password").and().logout().logoutSuccessUrl("/loginForm");
-
-        http.csrf().disable();
+        http.csrf().ignoringAntMatchers("/h2-console/**");
         http.headers().frameOptions().disable();
 
     }

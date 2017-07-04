@@ -14,6 +14,7 @@
         resultType="com.sample.dto.BaseUserDto" flushCache="true">
         SELECT
         id,first_name,last_name
+        FROM BASE_USER
     </select>
 
   <insert id="insert" parameterType="com.sample.dto.BaseUserDto">
@@ -22,7 +23,7 @@
   </insert>
 
   <insert id="update" parameterType="com.sample.dto.BaseUserDto">
-    UPDATE BASE_USER SET id=#{id},first_name=#{first_name},last_name=#{last_name}
+    UPDATE BASE_USER SET id=#{id},first_name=#{firstName},last_name=#{lastName}
     WHERE id=#{id}
   </insert>
 

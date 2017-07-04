@@ -17,5 +17,5 @@ public interface BaseUserMapper {
 
     public void insert(BaseUserDto baseUserDto);
 
-    public void delete(BaseUserDto baseUserDto);
+    public void delete(String id);
 }

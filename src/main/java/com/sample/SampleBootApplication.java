@@ -2,8 +2,11 @@ package com.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 /**
  * Hello world!
@@ -22,5 +25,10 @@ public class SampleBootApplication
     @GetMapping("/")
     String home() {
         return "Hello World!";
+    }
+
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
     }
 }
