@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layouts/layout">
+<head>
+<title>場所一覧</title>
+</head>
+<body>
+
+  <div layout:fragment="content" class="col-sm-12">
+    <span th:text="${placeList}"></span>
+  </div>
+</body>
+</html>

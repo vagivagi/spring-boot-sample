@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,8 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/loginForm").permitAll().anyRequest().authenticated().and().formLogin()
-                .loginProcessingUrl("/login").loginPage("/loginForm").failureUrl("/loginForm?error").defaultSuccessUrl("/baseUser/", true)
-                .usernameParameter("id").passwordParameter("password").and().logout().logoutSuccessUrl("/loginForm");
+                .loginProcessingUrl("/login").loginPage("/loginForm").failureUrl("/loginForm?error")
+                .defaultSuccessUrl("/baseUser/", true).usernameParameter("id").passwordParameter("password").and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .logoutSuccessUrl("/loginForm");
         http.csrf().ignoringAntMatchers("/h2-console/**");
         http.headers().frameOptions().disable();
 

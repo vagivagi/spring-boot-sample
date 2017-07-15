@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>Menu</title>
+<body>
+  <div th:fragment="menu"
+    th:with="baseUserAccountDto=${#authentication.principal.baseUserAccountDto}">
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <!-- タイトル -->
+        <a class="nav-brand" th:href="@{/}">TOP</a>
+      </div>
+      <!-- メニュー -->
+      <ul class="nav navbar-nav"
+        sec:authorize="${hasRole('ROLE_USER') and #vars.baseUserAccountDto.id =='001'}">
+        <li class="active"><a th:href="@{/baseUser/}">ユーザ管理</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{/place/}">場所管理</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

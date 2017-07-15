@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en">
 <meta charset="UTF-8" />
 <title>Layout</title>
@@ -14,7 +15,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>ユーザ管理システム</h1>
+    <div class="row">
+      <div class="col col-md-4">
+        <span th:with="sysdate=${#dates.createNow()}"
+          th:text="${#dates.format(sysdate, 'yyyy/MM/dd HH:mm')}">2016/08/15
+          20:00</span>
+      </div>
+      <div class="col col-md-4">
+        <span sec:authentication="principal.username">User Name</span>
+      </div>
+      <div class="col col-md-4"><a th:href="@{/logout}">logout</a>
+      </div>
+    </div>
+    <div th:replace="fragments/menu :: menu"></div>
     <div layout:fragment="content">Fake content</div>
   </div>
   <script
