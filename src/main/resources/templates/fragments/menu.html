@@ -7,7 +7,7 @@
 <title>Menu</title>
 <body>
   <div th:fragment="menu"
-    th:with="baseUserAccountDto=${#authentication.principal.baseUserAccountDto}">
+    th:with="baseUserDto=${#authentication.principal.baseUserDto}">
     <div class="navbar navbar-default">
       <div class="navbar-header">
         <!-- タイトル -->
@@ -15,7 +15,7 @@
       </div>
       <!-- メニュー -->
       <ul class="nav navbar-nav"
-        sec:authorize="${hasRole('ROLE_USER') and #vars.baseUserAccountDto.id =='001'}">
+        sec:authorize="${hasRole('BASE_ADMIN') and #vars.baseUserDto.id =='001'}">
         <li class="active"><a th:href="@{/baseUser/}">ユーザ管理</a></li>
       </ul>
       <ul class="nav navbar-nav">

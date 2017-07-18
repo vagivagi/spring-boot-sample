@@ -3,41 +3,37 @@ package com.sample.service;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sample.dto.BaseUserAccountDto;
+import com.sample.dto.BaseUserDto;
 
 import lombok.Data;
 
 @Data
 public class LoginUserDetails implements UserDetails {
-    private final BaseUserAccountDto baseUserAccountDto;
+    private final BaseUserDto baseUserDto;
 
-    public LoginUserDetails(BaseUserAccountDto baseUserAccountDto) {
-        this.baseUserAccountDto = baseUserAccountDto;
+    public LoginUserDetails(BaseUserDto baseUserDto) {
+        this.baseUserDto = baseUserDto;
     }
 
-    public BaseUserAccountDto getBaseUserAccountDto() {
-        return baseUserAccountDto;
+    public BaseUserDto getBaseUserDto() {
+        return baseUserDto;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO 自動生成されたメソッド・スタブ
-        return AuthorityUtils.createAuthorityList("ROLE_USER");
+        return baseUserDto.getBaseUserAttributeDtos();
     }
 
     @Override
     public String getPassword() {
-        // TODO 自動生成されたメソッド・スタブ
-        return baseUserAccountDto.getPassword();
+        return baseUserDto.getBaseUserAccountDto().getPassword();
     }
 
     @Override
     public String getUsername() {
-        // TODO 自動生成されたメソッド・スタブ
-        return baseUserAccountDto.getId();
+        return baseUserDto.getId();
     }
 
     @Override

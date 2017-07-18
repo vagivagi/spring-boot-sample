@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.sample.dto.BaseUserAccountDto;
-import com.sample.repository.BaseUserAccountMapper;
+import com.sample.dto.BaseUserDto;
+import com.sample.repository.BaseUserMapper;
 
 @Service
 public class LoginUserDetailsService implements UserDetailsService {
     @Autowired
-    BaseUserAccountMapper baseUserAccountMapper;
+    BaseUserMapper baseUserMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        BaseUserAccountDto baseUserAccountDto = baseUserAccountMapper.findById(username);
-        if (baseUserAccountDto == null){
+        BaseUserDto baseUserDto = baseUserMapper.findById(username);
+        if (baseUserDto == null){
             throw new UsernameNotFoundException("IDが見つかりませんでした。");
         }
-        return new LoginUserDetails(baseUserAccountDto);
+        return new LoginUserDetails(baseUserDto);
     }
 
 }

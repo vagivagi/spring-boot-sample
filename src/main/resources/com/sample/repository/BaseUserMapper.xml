@@ -2,12 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.repository.BaseUserMapper">
 
-<select id="findById" parameterType="String"
-        resultType="com.sample.dto.BaseUserDto" flushCache="true">
+  <select id="findById" parameterType="String"
+        resultMap="baseUserResultMap" flushCache="true">
         SELECT
-        id,first_name,last_name
-        FROM BASE_USER
-        WHERE id = #{id}
+        t1.id AS id,t1.first_name,t1.last_name,
+        t2.id,t2.password,
+        t3.attribute_name,t3.sort_no,t3.id
+        FROM BASE_USER t1
+        INNER JOIN BASE_USER_ACCOUNT t2
+        ON t1.id = t2.id
+        INNER JOIN BASE_USER_ATTRIBUTE t3
+        ON t1.id = t3.id
+        WHERE t1.id = #{id}
     </select>
 
     <select id="findAll" resultSetType="SCROLL_SENSITIVE"
@@ -16,6 +22,21 @@
         id,first_name,last_name
         FROM BASE_USER
     </select>
+
+    <resultMap id="baseUserResultMap" type="com.sample.dto.BaseUserDto">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <collection property="baseUserAccountDto" javaType="String" ofType="com.sample.dto.BaseUserAccountDto">
+            <result property="id" column="id"/>
+            <result property="password" column="password"/>
+        </collection>
+        <collection property="baseUserAttributeDtos" javaType="ArrayList" ofType="com.sample.dto.BaseUserAttributeDto">
+            <result property="attributeName" column="attribute_name"/>
+            <result property="sortNo" column="sort_no"/>
+            <result property="id" column="id"/>
+        </collection>
+    </resultMap>
 
   <insert id="insert" parameterType="com.sample.dto.BaseUserDto">
     INSERT INTO BASE_USER (id,first_name,last_name)

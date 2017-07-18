@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.repository.BaseUserAttributeMapper">
+
+<select id="findById" parameterType="String"
+        resultType="com.sample.dto.BaseUserAttributeDto" flushCache="true">
+        SELECT
+        attribute_name,sort_no,id
+        FROM BASE_USER_ATTRIBUTE
+        WHERE attribute_name = #{attributeName}
+        AND sort_no = #{sortNo}
+        AND id = #{id}
+    </select>
+
+    <select id="findAll" resultSetType="SCROLL_SENSITIVE"
+        resultType="com.sample.dto.BaseUserAttributeDto" flushCache="true">
+        SELECT
+        attribute_name,sort_no,id
+        FROM BASE_USER_ATTRIBUTE
+    </select>
+
+  <insert id="insert" parameterType="com.sample.dto.BaseUserAttributeDto">
+    INSERT INTO BASE_USER_ATTRIBUTE (attribute_name,sort_no,id)
+    VALUES (#{attributeName},#{sortNo},#{id})
+  </insert>
+
+  <insert id="update" parameterType="com.sample.dto.BaseUserAttributeDto">
+    UPDATE BASE_USER_ATTRIBUTE SET attribute_name=#{attributeName},sort_no=#{sortNo},id=#{id}
+    WHERE attribute_name = #{attributeName}
+    AND sort_no = #{sortNo}
+    AND id = #{id}
+  </insert>
+
+  <insert id="delete" parameterType="com.sample.dto.BaseUserAttributeDto">
+    DELETE FROM BASE_USER_ATTRIBUTE
+    WHERE attribute_name = #{attributeName}
+    AND sort_no = #{sortNo}
+    AND id = #{id}
+  </insert>
+
+</mapper>
