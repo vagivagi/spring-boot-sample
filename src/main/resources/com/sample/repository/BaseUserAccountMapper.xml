@@ -5,31 +5,31 @@
 <select id="findById" parameterType="String"
         resultType="com.sample.dto.BaseUserAccountDto" flushCache="true">
         SELECT
-        id,password
+        account_id,id,password,login_failed_count
         FROM BASE_USER_ACCOUNT
-        WHERE id = #{id}
+        WHERE account_id = #{accountId}
     </select>
 
     <select id="findAll" resultSetType="SCROLL_SENSITIVE"
         resultType="com.sample.dto.BaseUserAccountDto" flushCache="true">
         SELECT
-        id,password
+        account_id,id,password,login_failed_count
         FROM BASE_USER_ACCOUNT
     </select>
 
   <insert id="insert" parameterType="com.sample.dto.BaseUserAccountDto">
-    INSERT INTO BASE_USER_ACCOUNT (id,password)
+    INSERT INTO BASE_USER_ACCOUNT (account_id,id,password,login_failed_count)
     VALUES (#{id},#{password})
   </insert>
 
   <insert id="update" parameterType="com.sample.dto.BaseUserAccountDto">
-    UPDATE BASE_USER_ACCOUNT SET id=#{id},password=#{password}
-    WHERE id=#{id}
+    UPDATE BASE_USER_ACCOUNT SET account_id=#{accountId},id=#{id},password=#{password},login_failed_count=#{loginFailedCount}
+    WHERE account_id=#{accountId}
   </insert>
 
   <insert id="delete" parameterType="com.sample.dto.BaseUserAccountDto">
     DELETE FROM BASE_USER_ACCOUNT
-    WHERE id=#{id}
+    WHERE account_id=#{accountId}
   </insert>
 
 </mapper>

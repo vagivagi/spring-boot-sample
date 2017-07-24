@@ -1,4 +1,4 @@
-package com.sample.service;
+package com.sample.service.impl;
 
 import java.util.Collection;
 
@@ -10,10 +10,10 @@ import com.sample.dto.BaseUserDto;
 import lombok.Data;
 
 @Data
-public class LoginUserDetails implements UserDetails {
+public class LoginUserDetailsImpl implements UserDetails {
     private final BaseUserDto baseUserDto;
 
-    public LoginUserDetails(BaseUserDto baseUserDto) {
+    public LoginUserDetailsImpl(BaseUserDto baseUserDto) {
         this.baseUserDto = baseUserDto;
     }
 
@@ -44,8 +44,7 @@ public class LoginUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO 自動生成されたメソッド・スタブ
-        return true;
+        return baseUserDto.getBaseUserAccountDto().getLoginFailedCount() < 5;
     }
 
     @Override

@@ -6,7 +6,7 @@
         resultMap="baseUserResultMap" flushCache="true">
         SELECT
         t1.id AS id,t1.first_name,t1.last_name,
-        t2.id,t2.password,
+        t2.account_id,t2.id,t2.password,t2.login_failed_count,
         t3.attribute_name,t3.sort_no,t3.id
         FROM BASE_USER t1
         INNER JOIN BASE_USER_ACCOUNT t2
@@ -28,8 +28,10 @@
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
         <collection property="baseUserAccountDto" javaType="String" ofType="com.sample.dto.BaseUserAccountDto">
+            <result property="accountId" column="account_id"/>
             <result property="id" column="id"/>
             <result property="password" column="password"/>
+            <result property="loginFailedCount" column="login_failed_count"/>
         </collection>
         <collection property="baseUserAttributeDtos" javaType="ArrayList" ofType="com.sample.dto.BaseUserAttributeDto">
             <result property="attributeName" column="attribute_name"/>

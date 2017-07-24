@@ -1,4 +1,4 @@
-package com.sample.service;
+package com.sample.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +10,7 @@ import com.sample.dto.BaseUserDto;
 import com.sample.repository.BaseUserMapper;
 
 @Service
-public class LoginUserDetailsService implements UserDetailsService {
+public class LoginUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     BaseUserMapper baseUserMapper;
 
@@ -20,7 +20,7 @@ public class LoginUserDetailsService implements UserDetailsService {
         if (baseUserDto == null){
             throw new UsernameNotFoundException("IDが見つかりませんでした。");
         }
-        return new LoginUserDetails(baseUserDto);
+        return new LoginUserDetailsImpl(baseUserDto);
     }
 
 }

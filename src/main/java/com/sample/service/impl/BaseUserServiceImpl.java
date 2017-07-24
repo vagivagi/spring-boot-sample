@@ -1,4 +1,4 @@
-package com.sample.service;
+package com.sample.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sample.dto.BaseUserDto;
 import com.sample.repository.BaseUserMapper;
+import com.sample.service.BaseUserService;
 
 @Service("baseUserService")
 @Transactional

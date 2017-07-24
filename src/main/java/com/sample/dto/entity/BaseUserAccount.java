@@ -17,7 +17,9 @@ import lombok.NoArgsConstructor;
 public class BaseUserAccount {
 
     @Id
+    private String accountId;
     private String id;
     @JsonIgnore
     private String password;
+    private int loginFailedCount;
 }

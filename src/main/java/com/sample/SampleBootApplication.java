@@ -2,7 +2,9 @@ package com.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
@@ -34,5 +36,12 @@ public class SampleBootApplication {
     @Bean
     public Java8TimeDialect java8TimeDialect() {
         return new Java8TimeDialect();
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        return messageSource;
     }
 }

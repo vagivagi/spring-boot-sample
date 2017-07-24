@@ -9,7 +9,7 @@ import com.sample.dto.BaseUserAccountDto;
 @Mapper
 public interface BaseUserAccountMapper {
 
-    public BaseUserAccountDto findById(String id);
+    public BaseUserAccountDto findById(String accountId);
 
     public List<BaseUserAccountDto> findAll();
 
@@ -17,5 +17,5 @@ public interface BaseUserAccountMapper {
 
     public void insert(BaseUserAccountDto baseUserAccountDto);
 
-    public void delete(BaseUserAccountDto baseUserAccountDto);
+    public void delete(String accountId);
 }
